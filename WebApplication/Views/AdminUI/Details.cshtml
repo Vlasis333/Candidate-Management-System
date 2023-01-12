@@ -1,0 +1,84 @@
+﻿@model EFDataAccess.Models.Candidate
+
+<h2>@ViewBag.Title</h2>
+<h3>@ViewBag.Message</h3>
+
+<div class="container">
+    <hr />
+    <div class="row">
+        <div class="col-xs-3">
+            <dl class="dl-horizontal">
+                <dt>Id</dt>
+                <dd>@Html.DisplayFor(model => model.CandidateId)</dd>
+
+                <dt>First Name</dt>
+                <dd>@Html.DisplayFor(model => model.FirstName)</dd>
+
+                <dt>Middle Name</dt>
+                <dd>@Html.DisplayFor(model => model.MiddleName)</dd>
+
+                <dt>Last Name</dt>
+                <dd>@Html.DisplayFor(model => model.LastName)</dd>
+
+                <dt>Gender</dt>
+                <dd>@Html.DisplayFor(model => model.Gender)</dd>
+
+                <dt>Native Language</dt>
+                <dd>@Html.DisplayFor(model => model.NativeLanguage)</dd>
+
+                <dt>Birth Date</dt>
+                <dd>@Html.DisplayFor(model => model.BirthDate)</dd>
+            </dl>
+        </div>
+        <div class="col-xs-3">
+            <dl class="dl-horizontal">
+                <dt>Landline Number</dt>
+                <dd>@Html.DisplayFor(model => model.CandidateContact.LandlineNumber)</dd>
+
+                <dt>Mobile Number</dt>
+                <dd>@Html.DisplayFor(model => model.CandidateContact.MobileNumber)</dd>
+
+                <dt>Email</dt>
+                <dd>@Html.DisplayFor(model => model.CandidateContact.Email)</dd>
+            </dl>
+        </div>
+        <div class="col-xs-3">
+            <dl class="dl-horizontal">
+                <dt>Address</dt>
+                <dd>@Html.DisplayFor(model => model.CandidateLocation.Address)</dd>
+
+                <dt>Address 2</dt>
+                <dd>@Html.DisplayFor(model => model.CandidateLocation.Address2)</dd>
+
+                <dt>Residence</dt>
+                <dd>@Html.DisplayFor(model => model.CandidateLocation.Residence)</dd>
+
+                <dt>Province</dt>
+                <dd>@Html.DisplayFor(model => model.CandidateLocation.Province)</dd>
+
+                <dt>City</dt>
+                <dd>@Html.DisplayFor(model => model.CandidateLocation.City)</dd>
+
+                <dt>PostalCode</dt>
+                <dd>@Html.DisplayFor(model => model.CandidateLocation.PostalCode)</dd>
+            </dl>
+        </div>
+        <div class="col-xs-3">
+            <dl class="dl-horizontal">
+                <dt>Photo Identification Type</dt>
+                <dd>@Html.DisplayFor(model => model.CandidatePhotoIdentification.PhotoIdentificationType.Type)</dd>
+
+                <dt>Photo Identification Number</dt>
+                <dd>@Html.DisplayFor(model => model.CandidatePhotoIdentification.Number)</dd>
+
+                <dt>Photo Issue Date</dt>
+                <dd>@Html.DisplayFor(model => model.CandidatePhotoIdentification.IssueDate)</dd>
+            </dl>
+        </div>
+    </div>
+</div>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CandidateId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

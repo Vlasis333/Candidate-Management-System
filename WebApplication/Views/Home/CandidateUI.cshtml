@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "Candidate's UI";
+}
+
+<h2>@ViewBag.Title</h2>
+<h3>@ViewBag.Message</h3>
+
+@using (Html.BeginForm("Index", "CandidateCertificates", FormMethod.Post))
+{
+    <input type="number" name="candidateId" id="candidateId" />
+    <button type="submit">Log In</button>
+}

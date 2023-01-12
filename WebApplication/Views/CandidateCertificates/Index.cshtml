@@ -1,0 +1,51 @@
+﻿@model  IEnumerable<EFDataAccess.Models.CandidateCertificates>
+
+<h2>@ViewBag.Title</h2>
+<h3>@ViewBag.Message</h3>
+
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">My Score</th>
+                <th scope="col">Assessment Result</th>
+                <th scope="col">Examination Date</th>
+                <th scope="col">Score Report Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(x => item.Certificate.Title)</td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CertificateAssessment.CandidateScore)
+                        <span>/</span>
+                        @Html.DisplayFor(modelItem => item.CertificateAssessment.MaximumScore)
+                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.CertificateAssessment.AssessmentResult)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ExaminationDate)</td>
+                    <td>@Html.DisplayFor(modelItem => item.CertificateAssessment.ScoreReportDate)</td>
+                    @*<td>
+                        @using (Html.BeginForm("DownloadSelectedCertificate", "CandidateCertificates", FormMethod.Post, new { target = "_blank" }))
+                        {
+                            <input type="hidden" id="@item.CandidateCertificatesId" name="@item.CandidateCertificatesId" value="@item.CandidateCertificatesId">
+                            <input type="submit" class="btn btn-info" value="Download Certificate" />// SOS needs implementation
+                        }
+                    </td>*@
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="container bg-light">
+    <div class="col-md-12 text-center">
+        @using (Html.BeginForm("DownloadAllCertificates", "CandidateCertificates", FormMethod.Post, new { target = "_blank" }))
+        {
+            <input type="submit" class="btn btn-primary" value="Download All" />
+        }
+        <span style="color: #3F72AF; font-size: 0.875em">Save location is the public documents</span>
+    </div>
+</div>

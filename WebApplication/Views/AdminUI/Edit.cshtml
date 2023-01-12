@@ -1,0 +1,196 @@
+﻿@model EFDataAccess.Models.Candidate
+
+<h2>@ViewBag.Title</h2>
+<h3>@ViewBag.Message</h3>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="row">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="col-sm-3">
+            <div class="card">
+                <h4>General Info</h4>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.CandidateId)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FirstName)
+                    <div>
+                        @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MiddleName)
+                    <div>
+                        @Html.EditorFor(model => model.MiddleName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.MiddleName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LastName)
+                    <div>
+                        @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Gender)
+                    <div>
+                        @Html.DropDownListFor(model => model.Gender, new SelectList(ViewBag.GenderItems, "Value", "Text", new { @class = "form-control" }))
+                        @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.NativeLanguage)
+                    <div>
+                        @Html.DropDownListFor(model => model.NativeLanguage, new SelectList(ViewBag.LanguageItems, "Value", "Text", new { @class = "form-control" }))
+                        @Html.ValidationMessageFor(model => model.NativeLanguage, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.BirthDate)
+                    <div>
+                        @Html.EditorFor(model => model.BirthDate, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.BirthDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-3">
+            <div class="card">
+                <h4>Location Info</h4>
+                @Html.HiddenFor(model => model.CandidateLocation.CandidateLocationId)
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CandidateLocation.Address)
+                    <div>
+                        @Html.EditorFor(model => model.CandidateLocation.Address, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CandidateLocation.Address, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CandidateLocation.Address2)
+                    <div>
+                        @Html.EditorFor(model => model.CandidateLocation.Address2, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CandidateLocation.Address2, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CandidateLocation.City)
+                    <div>
+                        @Html.EditorFor(model => model.CandidateLocation.City, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CandidateLocation.City, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CandidateLocation.Province)
+                    <div>
+                        @Html.EditorFor(model => model.CandidateLocation.Province, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CandidateLocation.Province, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CandidateLocation.Residence)
+                    <div>
+                        @Html.EditorFor(model => model.CandidateLocation.Residence, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CandidateLocation.Residence, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CandidateLocation.PostalCode)
+                    <div>
+                        @Html.EditorFor(model => model.CandidateLocation.PostalCode, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CandidateLocation.PostalCode, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-3">
+            <div class="card">
+                <h4>Contact Info</h4>
+                @Html.HiddenFor(model => model.CandidateContact.CandidateContactId)
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CandidateContact.MobileNumber)
+                    <div>
+                        @Html.EditorFor(model => model.CandidateContact.MobileNumber, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CandidateContact.MobileNumber, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CandidateContact.LandlineNumber)
+                    <div>
+                        @Html.EditorFor(model => model.CandidateContact.LandlineNumber, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CandidateContact.LandlineNumber, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CandidateContact.Email)
+                    <div>
+                        @Html.EditorFor(model => model.CandidateContact.Email, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CandidateContact.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-3">
+            <div class="card">
+                <h4>Id Card Info</h4>
+                @Html.HiddenFor(model => model.CandidatePhotoIdentification.CandidatePhotoIdentificationId)
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CandidatePhotoIdentification.PhotoIdentificationType.Type)
+                    <div>
+                        @Html.DropDownListFor(model => model.CandidatePhotoIdentification.PhotoIdentificationId, new SelectList(ViewBag.IdentificationsItems, "Value", "Text", new { @class = "form-control" }))
+                        @Html.ValidationMessageFor(model => model.CandidatePhotoIdentification.PhotoIdentificationType.Type, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CandidatePhotoIdentification.IssueDate)
+                    <div>
+                        @Html.EditorFor(model => model.CandidatePhotoIdentification.IssueDate, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CandidatePhotoIdentification.IssueDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CandidatePhotoIdentification.Number)
+                    <div>
+                        @Html.EditorFor(model => model.CandidatePhotoIdentification.Number, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CandidatePhotoIdentification.Number, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+        <div class="col col-lg-1">
+            <input type="submit" value="Save" class="btn btn-success" />
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,44 @@
+﻿@model  IEnumerable<EFDataAccess.Models.Candidate>
+
+<h2>@ViewBag.Title</h2>
+<h3>@ViewBag.Message</h3>
+
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Title</th>
+                <th scope="col">Score</th>
+                <th scope="col">Assessment Result</th>
+                <th scope="col">Examination Date</th>
+                <th scope="col">Score Report Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                foreach (var cert in item.CandidateCertificates)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)</td>
+                        <td>@Html.DisplayFor(certItem => cert.Certificate.Title)</td>
+                        <td>
+                            @Html.DisplayFor(certItem => cert.CertificateAssessment.CandidateScore)
+                            <span>/</span>
+                            @Html.DisplayFor(certItem => cert.CertificateAssessment.MaximumScore)
+                        </td>
+                        <td>@Html.DisplayFor(certItem => cert.CertificateAssessment.AssessmentResult)</td>
+                        <td>@Html.DisplayFor(certItem => cert.ExaminationDate)</td>
+                        <td>@Html.DisplayFor(certItem => cert.CertificateAssessment.ScoreReportDate)</td>
+
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+<div>
+    @Html.ActionLink("Back to List of Candidates", "Index")
+</div>

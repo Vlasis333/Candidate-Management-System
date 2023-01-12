@@ -1,0 +1,8 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<h2>@ViewBag.Message</h2>
+
+<a href="@Url.Action("Index","AdminUI")" class="btn btn-primary">Administrator's UI</a>
+<a href="@Url.Action("CandidateUI","Home")" class="btn btn-primary">Candidate's UI</a>

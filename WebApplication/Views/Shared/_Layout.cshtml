@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+
+<body style="padding-top:unset; padding-bottom:unset">
+    @* header on all pages *@
+    <div class="header">
+        <div class="imgDiv">
+            <a href="https://www.peoplecert.org/" target="_blank">
+                <img class="peopleCertLogo" src="@Url.Content("~/Images/peoplecert.png")" alt="PeopleCert Logo">
+            </a>
+        </div>
+        <div class="info">
+            <h1>Vlasios Mavraganis</h1>
+            <p>
+                <strong>Coding BootCamp</strong>
+                <br>
+                <strong>Assignment 3B</strong>
+            </p>
+        </div>
+    </div>
+
+    @* navigation manu on all pages *@
+    <div class="container">
+        <div class="navbar navbar-expand-lg">
+            <a href="@Url.Action("Index","Home")" class="btn btn-primary">Home Page</a>
+        </div>
+    </div>
+
+    @* footer on all pages *@
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Copyright made by Vlasios Mavraganis</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

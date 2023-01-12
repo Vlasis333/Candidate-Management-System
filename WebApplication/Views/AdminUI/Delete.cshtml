@@ -1,0 +1,40 @@
+﻿@model EFDataAccess.Models.Candidate
+
+<h2>@ViewBag.Title</h2>
+<h3>@ViewBag.Message</h3>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Id</dt>
+        <dd>@Html.DisplayFor(model => model.CandidateId)</dd>
+
+        <dt>First Name</dt>
+        <dd>@Html.DisplayFor(model => model.FirstName)</dd>
+
+        <dt>Middle Name</dt>
+        <dd>@Html.DisplayFor(model => model.MiddleName)</dd>
+
+        <dt>Last Name</dt>
+        <dd>@Html.DisplayFor(model => model.LastName)</dd>
+
+        <dt>Gender</dt>
+        <dd>@Html.DisplayFor(model => model.Gender)</dd>
+
+        <dt>Native Language</dt>
+        <dd>@Html.DisplayFor(model => model.NativeLanguage)</dd>
+
+        <dt>Birth Date</dt>
+        <dd>@Html.DisplayFor(model => model.BirthDate)</dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
