@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EFDataAccess.Models
@@ -12,6 +13,7 @@ namespace EFDataAccess.Models
         public string Address { get; set; }
         [MaxLength(120)]
         [StringLength(120, MinimumLength = 0, ErrorMessage = "Characters from 0 to 120")]
+        [DisplayName("Second Address")]
         public string Address2 { get; set; }
         [MaxLength(120)]
         [StringLength(120, MinimumLength = 0, ErrorMessage = "Characters from 0 to 120")]
@@ -24,6 +26,7 @@ namespace EFDataAccess.Models
         public string City { get; set; }
         [MaxLength(15)]
         [StringLength(15, MinimumLength = 0, ErrorMessage = "Characters from 0 to 15")]
+        [DisplayName("Postal Code")]
         public string PostalCode { get; set; }
 
         public virtual Candidate Candidate { get; set; }
