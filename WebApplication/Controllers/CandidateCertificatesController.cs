@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
@@ -32,7 +33,7 @@ namespace WebApplication.Controllers
         /// Used to get the Id enterd by the user and log in as this current candidate
         /// </summary>
         [HttpPost]
-        public ActionResult Index(int candidateId)
+        public async Task<ActionResult> Index(int candidateId)
         {
             var currentCandidate = _candidateRepository.GetCandidate(candidateId);
 
@@ -43,7 +44,7 @@ namespace WebApplication.Controllers
 
                 _candidateId = candidateId;
 
-                return View(_candidateRepository.GetCertificatesByCandidateId(candidateId));
+                return View(await _candidateRepository.GetCertificatesByCandidateIdAsync(candidateId));
             }
             else
             {

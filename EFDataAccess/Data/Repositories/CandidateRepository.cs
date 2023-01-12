@@ -52,6 +52,18 @@ namespace EFDataAccess.Data.Repositories
             return candidateCertificates.ToList();
         }
 
+        public async Task<IEnumerable<CandidateCertificates>> GetCertificatesByCandidateIdAsync(int candidateId)
+        {
+            var currentCandidate = _context.Candidates.Include("CandidateCertificates").Where(p => p.CandidateId == candidateId).SingleOrDefault();
+            var candidateCertificates = currentCandidate.CandidateCertificates;
+
+            foreach (CandidateCertificates candidateCertificate in candidateCertificates)
+            {
+                LoadCandidateCertificates(_context, candidateCertificate);
+            }
+            return await Task.Run(() => candidateCertificates.ToList());
+        }
+
         /// <summary>
         /// Download a pdf file with all the certificates of a candidate and returns a string with the info needed of the method (save or no save)
         /// </summary>

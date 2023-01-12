@@ -75,6 +75,14 @@ namespace EFDataAccess.Data.Repositories
         }
 
         /// <summary>
+        /// Returns all the candidates with thier information async
+        /// </summary>
+        public async Task<IEnumerable<Candidate>> GetAllCandidatesAsync()
+        {
+            return await Task.Run(() => _context.Candidates.ToList());
+        }
+
+        /// <summary>
         /// Returns a single candidate by given Id
         /// </summary>
         public Candidate GetCandidate(int id)
@@ -113,6 +121,14 @@ namespace EFDataAccess.Data.Repositories
         public IEnumerable<Candidate> GetAllCandidatesWithCertificates()
         {
             return _context.Candidates.Include(c => c.CandidateCertificates).ToList();
+        }
+
+        /// <summary>
+        /// Returns a list with all the certificates for every candidate async
+        /// </summary>
+        public async Task<IEnumerable<Candidate>> GetAllCandidatesWithCertificatesAsync()
+        {
+            return await Task.Run(() => _context.Candidates.Include(c => c.CandidateCertificates).ToList());
         }
 
         /// <summary>

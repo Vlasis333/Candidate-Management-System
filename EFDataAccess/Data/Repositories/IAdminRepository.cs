@@ -10,6 +10,7 @@ namespace EFDataAccess.Data.Repositories
     public interface IAdminRepository
     {
         IEnumerable<Candidate> GetAllCandidates();
+        Task<IEnumerable<Candidate>> GetAllCandidatesAsync();
         Candidate GetCandidate(int id);
         void AddCandidate(Candidate candidate);
         void UpdateCandidate(Candidate candidate);
@@ -17,6 +18,7 @@ namespace EFDataAccess.Data.Repositories
         void Save();
         PhotoIdentificationType GetPhotoIdentificationType(int id);
         IEnumerable<Candidate> GetAllCandidatesWithCertificates();
+        Task<IEnumerable<Candidate>> GetAllCandidatesWithCertificatesAsync();
         IEnumerable<PhotoIdentificationType> GetAllPhotoIdentifications();
     }
 }

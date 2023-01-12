@@ -8,6 +8,7 @@ using System.Linq;
 using System.Security.Policy;
 using System.Web;
 using System.Web.Mvc;
+using System.Threading.Tasks;
 
 namespace WebApplication.Controllers
 {
@@ -26,11 +27,11 @@ namespace WebApplication.Controllers
         }
 
         // GET: AdminUI (list of all the candidates)
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
             ViewBag.Title = "Logged in as Administrator";
 
-            return View(_adminrepository.GetAllCandidates());
+            return View(await _adminrepository.GetAllCandidatesAsync());
         }
 
         /// <summary>
@@ -143,12 +144,12 @@ namespace WebApplication.Controllers
         /// <summary>
         /// Display every certificate (passed or not) for every candidate
         /// </summary>
-        public ActionResult ShowAllCertificates()
+        public async Task<ActionResult> ShowAllCertificates()
         {
             ViewBag.Title = "Logged in as Administrator";
             ViewBag.Message = "List of all certificates for each candidate";
 
-            return View(_adminrepository.GetAllCandidatesWithCertificates());
+            return View(await _adminrepository.GetAllCandidatesWithCertificatesAsync());
         }
 
         /// <summary>
