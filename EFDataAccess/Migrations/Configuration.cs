@@ -133,7 +133,7 @@
                     MiddleName = "",
                     LastName = "Mavraganis",
                     Gender = GendersEnum.Male.ToString(),
-                    NativeLanguage = "Greek",
+                    NativeLanguage = LanguagesEnum.Greek.ToString(),
                     BirthDate = new DateTime(1994, 1, 6),
                     CandidateCertificates = context.CandidateCertificates.Where(p => p.CandidateCertificatesId == 1).ToList()
                 });
@@ -143,7 +143,7 @@
                     MiddleName = "",
                     LastName = "Bogdani",
                     Gender = GendersEnum.Female.ToString(),
-                    NativeLanguage = "Albanian",
+                    NativeLanguage = LanguagesEnum.Albanian.ToString(),
                     BirthDate = new DateTime(1997, 6, 4),
                     CandidateCertificates = context.CandidateCertificates.Where(p => p.CandidateCertificatesId == 2 || p.CandidateCertificatesId == 3).ToList()
                 });
@@ -153,7 +153,7 @@
                     MiddleName = "Puren",
                     LastName = "Ipsum",
                     Gender = GendersEnum.Binary.ToString(),
-                    NativeLanguage = "English",
+                    NativeLanguage = LanguagesEnum.English.ToString(),
                     BirthDate = new DateTime(1999, 07, 12),
                     CandidateCertificates = context.CandidateCertificates.Where(p => p.CandidateCertificatesId == 4).ToList()
                 });
@@ -163,7 +163,7 @@
                     MiddleName = "",
                     LastName = "Mavragani",
                     Gender = GendersEnum.Female.ToString(),
-                    NativeLanguage = "Greek",
+                    NativeLanguage = LanguagesEnum.Greek.ToString(),
                     BirthDate = new DateTime(1997, 6, 4),
                     CandidateCertificates = context.CandidateCertificates.Where(p => p.CandidateCertificatesId == 5 || p.CandidateCertificatesId == 6).ToList()
                 });

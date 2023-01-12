@@ -158,6 +158,14 @@ namespace EFDataAccess.Data.Repositories
         }
 
         /// <summary>
+        /// Method returns only a single photo identification type based on Id
+        /// </summary>
+        public PhotoIdentificationType GetPhotoIdentificationType(int id)
+        {
+            return _context.PhotoIdentificationTypes.SingleOrDefault(c => c.PhotoIdentificationTypeId == id); ;
+        }
+
+        /// <summary>
         /// Dispose of the db context created locally
         /// </summary>
         private bool _dispose = false; // local bool that will ensure the dispose only executes when called

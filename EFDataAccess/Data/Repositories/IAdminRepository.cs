@@ -15,6 +15,7 @@ namespace EFDataAccess.Data.Repositories
         void UpdateCandidate(Candidate candidate);
         void DeleteCandidate(int id);
         void Save();
+        PhotoIdentificationType GetPhotoIdentificationType(int id);
         IEnumerable<Candidate> GetAllCandidatesWithCertificates();
         IEnumerable<PhotoIdentificationType> GetAllPhotoIdentifications();
     }
