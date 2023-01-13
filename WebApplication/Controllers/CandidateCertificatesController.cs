@@ -60,38 +60,38 @@ namespace WebApplication.Controllers
         [ValidateInput(false)]
         public async Task<ActionResult> DownloadAllCertificates()
         {
-            string pdfPath = await _candidateRepository.DownloadAllCertificatesOfCandidate(_candidateId);
+            string returnedString = await _candidateRepository.DownloadAllCertificatesOfCandidate(_candidateId);
 
-            if (!pdfPath.StartsWith("Error"))
+            if (!returnedString.StartsWith("Error"))
             {
-                byte[] FileBytes = System.IO.File.ReadAllBytes(pdfPath);
+                byte[] FileBytes = System.IO.File.ReadAllBytes(returnedString);
                 return await Task.Run(() => File(FileBytes, "application/pdf"));
             }
             else
             {
-                return await Task.Run(() => Content($"<script language='javascript' type='text/javascript'>alert('{pdfPath}');</script>"));
+                return await Task.Run(() => Content($"<script language='javascript' type='text/javascript'>alert('{returnedString}');</script>"));
             }
         }
 
         // <summary>
         // Download the selected certificate of the current candidate
         // </summary>            
-        //[HttpPost]
-        //[ValidateInput(false)]
-        //public ActionResult DownloadSelectedCertificate()
-        //{
-        //    string s = _candidateRepository.DownloadAllCertificatesOfCandidate(_candidateId);
+        [HttpPost]
+        [ValidateInput(false)]
+        public async Task<ActionResult> DownloadSelectedCertificate(int certificateId)
+        {
+            string returnedString = await _candidateRepository.DownloadSelectedCertificateOfCandidate(_candidateId, certificateId);
 
-        //    if (!s.StartsWith("Error"))
-        //    {
-        //        string ReportURL = s;
-        //        byte[] FileBytes = System.IO.File.ReadAllBytes(ReportURL);
-        //        return File(FileBytes, "application/pdf");
-        //    }
-        //    else
-        //    {
-        //        return Content($"<script language='javascript' type='text/javascript'>alert('{s}');</script>");
-        //    }
-        //}
+            if (!returnedString.StartsWith("Error"))
+            {
+                string ReportURL = returnedString;
+                byte[] FileBytes = System.IO.File.ReadAllBytes(ReportURL);
+                return await Task.Run(() => File(FileBytes, "application/pdf"));
+            }
+            else
+            {
+                return await Task.Run(() => Content($"<script language='javascript' type='text/javascript'>alert('{returnedString}');</script>"));
+            }
+        }
     }
 }

@@ -38,6 +38,6 @@ namespace EFDataAccess.Models
         public virtual CandidateContact CandidateContact { get; set; }
         public virtual CandidatePhotoIdentification CandidatePhotoIdentification { get; set; }
         // Connection to the Certificates entity
-        public ICollection<CandidateCertificates> CandidateCertificates { get; set; }
+        public virtual ICollection<CandidateCertificates> CandidateCertificates { get; set; }
     }
 }

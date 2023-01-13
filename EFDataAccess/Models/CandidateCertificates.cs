@@ -13,6 +13,6 @@ namespace EFDataAccess.Models
         // Connections to other entities
         public virtual Certificate Certificate { get; set; }
         public virtual CertificateAssessment CertificateAssessment { get; set; } 
-        public ICollection<TopicAssesment> TopicAssesments { get; set; }
+        public virtual ICollection<TopicAssesment> TopicAssesments { get; set; }
     }
 }

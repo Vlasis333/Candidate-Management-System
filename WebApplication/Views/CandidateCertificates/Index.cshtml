@@ -27,13 +27,14 @@
                     <td>@Html.DisplayFor(modelItem => item.CertificateAssessment.AssessmentResult)</td>
                     <td>@Html.DisplayFor(modelItem => item.ExaminationDate)</td>
                     <td>@Html.DisplayFor(modelItem => item.CertificateAssessment.ScoreReportDate)</td>
-                    @*<td>
+                    <td>
                         @using (Html.BeginForm("DownloadSelectedCertificate", "CandidateCertificates", FormMethod.Post, new { target = "_blank" }))
                         {
-                            <input type="hidden" id="@item.CandidateCertificatesId" name="@item.CandidateCertificatesId" value="@item.CandidateCertificatesId">
-                            <input type="submit" class="btn btn-info" value="Download Certificate" />// SOS needs implementation
+                            <input type="hidden" name="certificateId" value="@item.Certificate.CertificateId">
+                            <input type="submit" class="btn btn-info" value="Download Certificate" />
+                            <span style="color: #3F72AF; font-size: 0.875em">(Including topics)</span>
                         }
-                    </td>*@
+                    </td>
                 </tr>
             }
         </tbody>

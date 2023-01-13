@@ -12,5 +12,6 @@ namespace EFDataAccess.Data.Repositories
         Task<Candidate> GetCandidate(int candidateId);
         Task<IEnumerable<CandidateCertificates>> GetCertificatesOfCandidate(int candidateId);
         Task<string> DownloadAllCertificatesOfCandidate(int candidateId);
+        Task<string> DownloadSelectedCertificateOfCandidate(int candidateId, int certificateId);
     }
 }

@@ -14,6 +14,6 @@ namespace EFDataAccess.Models
         public bool Active { get; set; }
 
         // Connections to other entities
-        public ICollection<Topic> Topics { get; set; }
+        public virtual ICollection<Topic> Topics { get; set; }
     }
 }

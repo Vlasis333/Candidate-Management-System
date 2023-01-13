@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using iTextSharp.text.pdf.parser;
+using Org.BouncyCastle.Crypto.Tls;
 
 namespace EFDataAccess.Data.Repositories
 {
@@ -83,7 +84,7 @@ namespace EFDataAccess.Data.Repositories
                         CertificateAssessment assessmet = candidateCertificate.CertificateAssessment;
 
                         _context.Entry(candidateCertificate).Reference(p => p.Certificate).Load();
-                        Certificate certificate = candidateCertificate.Certificate;
+                        Models.Certificate certificate = candidateCertificate.Certificate;
 
                         pdfDoc.Add(new Paragraph(""));
 
@@ -131,7 +132,101 @@ namespace EFDataAccess.Data.Repositories
             }
             catch (Exception ex)
             {
-                return await Task.Run(() => $"Error: {ex.Message}");
+                return $"Error: {ex.Message}";
+            }
+
+            return await Task.Run(() => returnString);
+        }
+
+        /// <summary>
+        /// Download a pdf file with a single certificates and it's topics
+        /// </summary>
+        public async Task<string> DownloadSelectedCertificateOfCandidate(int candidateId, int certificateId)
+        {
+            var currentCandidate = _context.Candidates.Include("CandidateCertificates").Where(p => p.CandidateId == candidateId).SingleOrDefault();
+            var candidateCertificate = currentCandidate.CandidateCertificates.Where(c => c.Certificate.CertificateId == certificateId).SingleOrDefault();
+            string returnString = "";
+
+            try
+            {
+                var pdfDoc = new Document(PageSize.A4, 10f, 10f, 10f, 10f);
+                using (var memoryStream = new MemoryStream())
+                {
+                    var writer = PdfWriter.GetInstance(pdfDoc, memoryStream);
+                    pdfDoc.Open();
+                    iTextSharp.text.Font fontDarkBlue = FontFactory.GetFont("Arial", 12, iTextSharp.text.Font.NORMAL, new BaseColor(Color.DarkBlue));
+
+                    pdfDoc.Add(new Paragraph(""));
+                    pdfDoc.Add(new Chunk($"Certificate {candidateCertificate.Certificate.Title}", fontDarkBlue)); 
+                    pdfDoc.Add(new Paragraph(""));
+                    pdfDoc.Add(new Chunk($"Candidate {currentCandidate.FirstName} {currentCandidate.LastName}", fontDarkBlue));
+                    pdfDoc.Add(new Paragraph(" "));
+
+                    _context.Entry(candidateCertificate).Reference(p => p.CertificateAssessment).Load();
+                    var assessmet = candidateCertificate.CertificateAssessment;                                      
+
+                    pdfDoc.Add(new Paragraph(""));
+
+                    pdfDoc.Add(new Chunk("Certificate Info", fontDarkBlue)); 
+                    pdfDoc.Add(new Paragraph(""));
+
+                    pdfDoc.Add(new Chunk("Assessment Test Code: ", fontDarkBlue));
+                    pdfDoc.Add(new Chunk(candidateCertificate.Certificate.AssessmentTestCode + " "));
+                    pdfDoc.Add(new Chunk("Examination Date: ", fontDarkBlue));
+                    pdfDoc.Add(new Chunk(candidateCertificate.ExaminationDate.ToShortDateString()));
+                    pdfDoc.Add(new Paragraph(""));
+
+                    pdfDoc.Add(new Chunk("Score Report Date: ", fontDarkBlue));
+                    pdfDoc.Add(new Chunk(assessmet.ScoreReportDate.ToShortDateString() + " "));
+                    pdfDoc.Add(new Chunk("Candidate: Score: ", fontDarkBlue));
+                    pdfDoc.Add(new Chunk(assessmet.CandidateScore.ToString()));
+                    pdfDoc.Add(new Paragraph(""));
+
+                    pdfDoc.Add(new Chunk("Maximum Score: ", fontDarkBlue));
+                    pdfDoc.Add(new Chunk(assessmet.MaximumScore.ToString() + " "));
+                    pdfDoc.Add(new Chunk("Percentage: Score: ", fontDarkBlue));
+                    pdfDoc.Add(new Chunk(assessmet.PercentageScore.ToString() + " %"));
+                    pdfDoc.Add(new Paragraph(""));
+
+                    pdfDoc.Add(new Chunk("Assessment Result: ", fontDarkBlue));
+                    pdfDoc.Add(new Chunk(assessmet.AssessmentResult.ToString() + " "));
+                    pdfDoc.Add(new Chunk("Active: ", fontDarkBlue));
+                    pdfDoc.Add(new Chunk(candidateCertificate.Certificate.Active.ToString()));
+
+                    pdfDoc.Add(new Paragraph(" "));
+                    pdfDoc.Add(new Chunk("Topics Info", fontDarkBlue));
+                    pdfDoc.Add(new Paragraph(""));
+
+                    var topicAssesments = candidateCertificate.TopicAssesments;
+
+                    foreach (TopicAssesment assesment in topicAssesments)
+                    {
+                        _context.Entry(assesment).Reference(p => p.Topic).Load();
+                        var topic = assesment.Topic;
+
+                        pdfDoc.Add(new Chunk("Topic Title: ", fontDarkBlue));
+                        pdfDoc.Add(new Chunk(topic.Title.ToString() + " "));
+                        pdfDoc.Add(new Chunk("Topic Result: ", fontDarkBlue));
+                        pdfDoc.Add(new Chunk($"{assesment.AwardedMarks} / {topic.PossibleMarks}"));
+
+                        pdfDoc.Add(new Paragraph(""));
+                    }
+
+                    pdfDoc.Close();
+
+                    byte[] bytes = memoryStream.ToArray();
+                    string path = Environment.GetFolderPath(Environment.SpecialFolder.CommonDocuments);
+                    string fileName = $@"\{currentCandidate.FirstName} {currentCandidate.LastName} Certificate {candidateCertificate.Certificate.Title}.pdf";
+                    File.WriteAllBytes(path + fileName, bytes);
+
+                    returnString = path + fileName;
+
+                    memoryStream.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                return $"Error: {ex.Message}";
             }
 
             return await Task.Run(() => returnString);
@@ -146,7 +241,7 @@ namespace EFDataAccess.Data.Repositories
             CertificateAssessment assessmet = candidateCertificate.CertificateAssessment;
 
             appDBContext.Entry(candidateCertificate).Reference(p => p.Certificate).Load();
-            Certificate certificate = candidateCertificate.Certificate;
+            Models.Certificate certificate = candidateCertificate.Certificate;
         }
 
         /// <summary>
