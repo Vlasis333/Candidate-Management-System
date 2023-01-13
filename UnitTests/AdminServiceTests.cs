@@ -7,10 +7,10 @@ using System;
 using System.Runtime.Remoting.Contexts;
 using System.Threading.Tasks;
 
-namespace AdminServiceUnitTests
+namespace UnitTests
 {
     [TestClass]
-    public class CandidateTests
+    public class CRUDTests
     {
         private readonly IAdminRepository _adminrepository = new AdminRepository(new AppDBContext());
 

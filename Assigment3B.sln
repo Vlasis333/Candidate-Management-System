@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFDataAccess", "EFDataAcces
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication", "WebApplication\WebApplication.csproj", "{CE77C72C-9854-47C9-A894-427A6EAB5D4D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "AdminServiceUnitTests\UnitTests.csproj", "{1D1AB461-9EB4-4B29-80C4-2C80E9B28D23}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{E2556D9E-C015-48A8-9201-D4B3D9ACB57C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{CE77C72C-9854-47C9-A894-427A6EAB5D4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE77C72C-9854-47C9-A894-427A6EAB5D4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE77C72C-9854-47C9-A894-427A6EAB5D4D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1D1AB461-9EB4-4B29-80C4-2C80E9B28D23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1D1AB461-9EB4-4B29-80C4-2C80E9B28D23}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1D1AB461-9EB4-4B29-80C4-2C80E9B28D23}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1D1AB461-9EB4-4B29-80C4-2C80E9B28D23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2556D9E-C015-48A8-9201-D4B3D9ACB57C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2556D9E-C015-48A8-9201-D4B3D9ACB57C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2556D9E-C015-48A8-9201-D4B3D9ACB57C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2556D9E-C015-48A8-9201-D4B3D9ACB57C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
