@@ -10,7 +10,7 @@ namespace EFDataAccess.Data.Repositories
     public interface ICandidateRepository
     {
         Task<Candidate> GetCandidate(int candidateId);
-        Task<IEnumerable<CandidateCertificates>> GetCertificatesByCandidateId(int candidateId);
+        Task<IEnumerable<CandidateCertificates>> GetCertificatesOfCandidate(int candidateId);
         Task<string> DownloadAllCertificatesOfCandidate(int candidateId);
     }
 }

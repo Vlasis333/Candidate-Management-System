@@ -44,7 +44,7 @@ namespace WebApplication.Controllers
 
                 _candidateId = candidateId;
 
-                return View(await _candidateRepository.GetCertificatesByCandidateId(candidateId));
+                return View(await _candidateRepository.GetCertificatesOfCandidate(candidateId));
             }
             else
             {

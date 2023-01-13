@@ -39,7 +39,7 @@ namespace EFDataAccess.Data.Repositories
         /// <summary>
         /// Return the certificates of a certain candidate
         /// </summary>
-        public async Task<IEnumerable<CandidateCertificates>> GetCertificatesByCandidateId(int candidateId)
+        public async Task<IEnumerable<CandidateCertificates>> GetCertificatesOfCandidate(int candidateId)
         {
             var currentCandidate = _context.Candidates.Include("CandidateCertificates").Where(p => p.CandidateId == candidateId).SingleOrDefault();
             var candidateCertificates = currentCandidate.CandidateCertificates;
