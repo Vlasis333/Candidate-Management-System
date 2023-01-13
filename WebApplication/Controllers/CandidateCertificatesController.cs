@@ -49,7 +49,7 @@ namespace WebApplication.Controllers
             else
             {
                 ViewBag.Message = "This Id does not exist, please provide us with the correct Candidate Number (Id):";
-                return await Task.Run(() => View("~/Views/Home/CandidateUI.cshtml"));
+                return await Task.Run(() => View("~/Views/Home/CandidateLogIn.cshtml"));
             }
         }
 
