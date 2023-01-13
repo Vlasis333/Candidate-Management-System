@@ -172,7 +172,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\CandidateUI.cshtml" />
+    <Content Include="Views\Home\CandidateLogIn.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\CandidateCertificates\Index.cshtml" />
     <Content Include="Views\AdminUI\Index.cshtml" />

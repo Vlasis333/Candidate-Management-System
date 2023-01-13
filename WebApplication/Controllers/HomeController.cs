@@ -20,7 +20,7 @@ namespace WebApplication.Controllers
             return View();
         }
 
-        public ActionResult CandidateUI()
+        public ActionResult CandidateLogIn()
         {
             ViewBag.Message = "Please provide us with your Candidate Number:";
 

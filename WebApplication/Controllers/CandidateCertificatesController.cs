@@ -40,7 +40,7 @@ namespace WebApplication.Controllers
             if (currentCandidate != null)
             {
                 ViewBag.Title = $"Logged in as {currentCandidate.FirstName} {currentCandidate.LastName}";
-                ViewBag.Message = "My Certificates";
+                ViewBag.Message = "Candidate's UI";
 
                 _candidateId = candidateId;
 
