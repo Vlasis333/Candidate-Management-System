@@ -14,16 +14,16 @@ namespace WebApplication.Controllers
 {
     public class AdminUIController : Controller
     {
-        private readonly IAdminRepository _adminrepository;
+        private readonly IAdminRepository _adminRepository;
 
         public AdminUIController()
         {
-            _adminrepository = new AdminRepository(new AppDBContext());
+            _adminRepository = new AdminRepository(new AppDBContext());
         }
 
         public AdminUIController(IAdminRepository adminrepository)
         {
-            _adminrepository = adminrepository;
+            _adminRepository = adminrepository;
         }
 
         // GET: AdminUI (list of all the candidates)
@@ -31,7 +31,7 @@ namespace WebApplication.Controllers
         {
             ViewBag.Title = "Logged in as Administrator";
 
-            return View(await _adminrepository.GetAllCandidates());
+            return View(await _adminRepository.GetAllCandidates());
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace WebApplication.Controllers
         {
             ViewBag.Title = "Logged in as Administrator";
 
-            var currentCandidate = await _adminrepository.GetCandidate(id);
+            var currentCandidate = await _adminRepository.GetCandidate(id);
 
             ViewBag.Message = $"Details of {currentCandidate.FirstName} {currentCandidate.LastName}";
 
@@ -71,7 +71,7 @@ namespace WebApplication.Controllers
                 ViewBag.Title = "Logged in as Administrator";
                 ViewBag.Message = "Create New Candidate";
 
-                await _adminrepository.AddCandidate(candidate);
+                await _adminRepository.AddCandidate(candidate);
                 return await Task.Run(() => RedirectToAction("Index"));
             }
 
@@ -85,7 +85,7 @@ namespace WebApplication.Controllers
             //default edit
             ViewBag.Title = "Logged in as Administrator";
 
-            var currentCandidate = await _adminrepository.GetCandidate(id);
+            var currentCandidate = await _adminRepository.GetCandidate(id);
 
             ViewBag.Message = $"Edit candidate: {currentCandidate.FirstName} {currentCandidate.LastName}";
 
@@ -106,7 +106,7 @@ namespace WebApplication.Controllers
                 ViewBag.Title = "Logged in as Administrator";
                 ViewBag.Message = $"Edit candidate: {candidate.FirstName} {candidate.LastName}";
 
-                await _adminrepository.UpdateCandidate(candidate);
+                await _adminRepository.UpdateCandidate(candidate);
 
                 return await Task.Run(() => RedirectToAction("Index"));
             }
@@ -123,7 +123,7 @@ namespace WebApplication.Controllers
         {
             ViewBag.Title = "Logged in as Administrator";
 
-            var currentCandidate = await _adminrepository.GetCandidate(id);
+            var currentCandidate = await _adminRepository.GetCandidate(id);
 
             ViewBag.Message = $"Are you sure you want to delete {currentCandidate.FirstName} {currentCandidate.LastName}?";
 
@@ -137,7 +137,7 @@ namespace WebApplication.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            await _adminrepository.DeleteCandidate(id);
+            await _adminRepository.DeleteCandidate(id);
             return await Task.Run(() => RedirectToAction("Index"));
         }
 
@@ -149,7 +149,7 @@ namespace WebApplication.Controllers
             ViewBag.Title = "Logged in as Administrator";
             ViewBag.Message = "List of all certificates for each candidate";
 
-            return View(await _adminrepository.GetAllCandidatesWithCertificates());
+            return View(await _adminRepository.GetAllCandidatesWithCertificates());
         }
 
         /// <summary>
@@ -158,7 +158,7 @@ namespace WebApplication.Controllers
         private async Task AddDropDownPhotoIdentifications(Candidate candidate = null)
         {
             var listOfIdentifications = new List<SelectListItem>();
-            var identificationTypes = await _adminrepository.GetAllPhotoIdentifications();
+            var identificationTypes = await _adminRepository.GetAllPhotoIdentifications();
 
             var group = new SelectListGroup();
 

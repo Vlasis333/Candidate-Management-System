@@ -63,8 +63,10 @@
   <ItemGroup>
     <Compile Include="Data\Repositories\AdminRepository.cs" />
     <Compile Include="Data\Repositories\CandidateRepository.cs" />
+    <Compile Include="Data\Repositories\CertificateManagerRepository.cs" />
     <Compile Include="Data\Repositories\IAdminRepository.cs" />
     <Compile Include="Data\Repositories\ICandidateRepository.cs" />
+    <Compile Include="Data\Repositories\ICertificateManagerRepository.cs" />
     <Compile Include="Helpers\AssessmentResultsEnum.cs" />
     <Compile Include="Helpers\GendersEnum.cs" />
     <Compile Include="Helpers\LanguagesEnum.cs" />

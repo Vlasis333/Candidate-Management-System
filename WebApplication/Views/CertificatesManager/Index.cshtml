@@ -1,0 +1,34 @@
+﻿@model IEnumerable<EFDataAccess.Models.Certificate>
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Test Code</th>
+            <th scope="col">Active</th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th scope="row">@Html.DisplayFor(modelItem => item.CertificateId)</th>
+            <td>@Html.DisplayFor(modelItem => item.Title)</td>
+            <td>@Html.DisplayFor(modelItem => item.AssessmentTestCode)</td>
+            <td>@Html.DisplayFor(modelItem => item.Active)</td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.CertificateId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.CertificateId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.CertificateId })
+            </td>
+        </tr>
+    }
+
+</table>

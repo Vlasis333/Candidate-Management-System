@@ -132,6 +132,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminUIController.cs" />
     <Compile Include="Controllers\CandidateCertificatesController.cs" />
+    <Compile Include="Controllers\CertificatesManagerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -181,6 +182,7 @@
     <Content Include="Views\AdminUI\Delete.cshtml" />
     <Content Include="Views\AdminUI\ShowAllCertificates.cshtml" />
     <Content Include="Views\AdminUI\Create.cshtml" />
+    <Content Include="Views\CertificatesManager\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
