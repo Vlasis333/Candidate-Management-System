@@ -1,10 +1,10 @@
 # Candidate Management System Web Application
-A ASP.NET MVC application with code first database (+dummy data) using entity framework.
-Provides the following functionalities to the user:
-  - Admin Service (CRUD on candidates and show all certificates for every Candidate)
-  - Candidate Service (Login as a candidate to see your certificates or download them to a PDF file)
+The Candidate Management System Web Application is a robust, user-friendly solution for managing candidate information. Built using ASP.NET MVC and utilizing a Code First approach with Entity Framework, this application offers a comprehensive set of features to streamline the management of candidate data. 
 
-Includes 3 Projects
-  - EFDataAccess (Class Library) that holds all the models, entities, and AppContext for the web application
-  - WebApplication that holds the application
-  - UnitTests used to run the unit tests for CRUD on admin service and verify the data
+The application includes a powerful admin service that allows for CRUD operations on candidates and the ability to view all certificates for each candidate. Additionally, candidates have access to a candidate service that allows them to login and view or download their certificates in PDF format. 
+
+The application is composed of three projects: 
+  - EFDataAccess: a class library containing the models, entities, and AppContext for the application, 
+  - WebApplication: which houses the main application
+  - UnitTests: which are used to perform CRUD operations on the admin service and verify data integrity
+
