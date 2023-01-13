@@ -31,5 +31,19 @@ namespace WebApplication.Controllers
 
             return View(await _certificateManagerRepository.GetCertificates());
         }
+
+        /// <summary>
+        /// Details of the selected certificate
+        /// </summary>
+        public async Task<ActionResult> Details(int id)
+        {
+            ViewBag.Title = "Logged in as Certificate Manager";
+
+            var currentCertificate = await _certificateManagerRepository.GetCertificate(id);
+
+            ViewBag.Message = $"Details of {currentCertificate.Title}";
+
+            return await Task.Run(() => View(currentCertificate));
+        }
     }
 }

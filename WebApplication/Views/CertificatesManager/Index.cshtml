@@ -22,7 +22,7 @@
             <th scope="row">@Html.DisplayFor(modelItem => item.CertificateId)</th>
             <td>@Html.DisplayFor(modelItem => item.Title)</td>
             <td>@Html.DisplayFor(modelItem => item.AssessmentTestCode)</td>
-            <td>@Html.DisplayFor(modelItem => item.Active)</td>
+            <td>@(item.Active ? "Active" : "Inactive")</td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.CertificateId }) |
                 @Html.ActionLink("Details", "Details", new { id = item.CertificateId }) |

@@ -28,5 +28,15 @@ namespace EFDataAccess.Data.Repositories
         {
             return await Task.Run(() => _context.Certificates.ToList());
         }
+
+        /// <summary>
+        /// Returns a single certificate by Id
+        /// </summary>
+        public async Task<Certificate> GetCertificate(int id)
+        {
+            var certificate = _context.Certificates
+            .SingleOrDefault(c => c.CertificateId == id);
+            return await Task.Run(() => certificate);
+        }
     }
 }

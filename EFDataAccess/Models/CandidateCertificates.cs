@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace EFDataAccess.Models
@@ -8,6 +9,7 @@ namespace EFDataAccess.Models
     {
         public int CandidateCertificatesId { get; set; }
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DisplayName("Examination Date")]
         public DateTime ExaminationDate { get; set; }
 
         // Connections to other entities

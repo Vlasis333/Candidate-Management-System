@@ -10,5 +10,6 @@ namespace EFDataAccess.Data.Repositories
     public interface ICertificateManagerRepository
     {
         Task<IEnumerable<Certificate>> GetCertificates();
+        Task<Certificate> GetCertificate(int id);
     }
 }

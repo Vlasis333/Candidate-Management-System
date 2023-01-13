@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace EFDataAccess.Models
@@ -10,6 +11,7 @@ namespace EFDataAccess.Models
         [MaxLength(70)]
         public string Title { get; set; }
         [MaxLength(30)]
+        [DisplayName("Test Code")]
         public string AssessmentTestCode { get; set; }
         public bool Active { get; set; }
 

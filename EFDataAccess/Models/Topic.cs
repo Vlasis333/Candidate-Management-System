@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace EFDataAccess.Models
@@ -12,6 +13,7 @@ namespace EFDataAccess.Models
         public string Title { get; set; }
         [MaxLength(120)]
         public string Description { get; set; }
+        [DisplayName("Possible Marks")]
         public Int16 PossibleMarks { get; set; }
     }
 }

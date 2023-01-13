@@ -183,6 +183,7 @@
     <Content Include="Views\AdminUI\ShowAllCertificates.cshtml" />
     <Content Include="Views\AdminUI\Create.cshtml" />
     <Content Include="Views\CertificatesManager\Index.cshtml" />
+    <Content Include="Views\CertificatesManager\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

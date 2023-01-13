@@ -1,0 +1,48 @@
+﻿@model EFDataAccess.Models.Certificate
+
+<h2>@ViewBag.Title</h2>
+<h3>@ViewBag.Message</h3>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(model => model.Title)</dt>
+        <dd>@Html.DisplayFor(model => model.Title)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.AssessmentTestCode)</dt>
+        <dd>@Html.DisplayFor(model => model.AssessmentTestCode)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Active)</dt>
+        <dd>@(Model.Active ? "Active" : "Inactive")</dd>
+
+    </dl>
+
+    <h5>Related Topics</h5>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Topic Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Possible Marks</th>
+            </tr>
+        </thead>
+
+        @foreach (var topic in Model.Topics)
+        {
+            <tr>
+                <th scope="row">@Html.DisplayFor(modelItem => topic.TopicId)</th>
+                <td>@Html.DisplayFor(modelItem => topic.Title)</td>
+                <td>@Html.DisplayFor(modelItem => topic.Description)</td>
+                <td>@Html.DisplayFor(modelItem => topic.PossibleMarks)</td>
+            </tr>
+        }
+
+    </table>
+
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CertificateId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
