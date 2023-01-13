@@ -7,4 +7,3 @@ The application is composed of three projects:
   - EFDataAccess: a class library containing the models, entities, and AppContext for the application, 
   - WebApplication: which houses the main application
   - UnitTests: which are used to perform CRUD operations on the admin service and verify data integrity
-
