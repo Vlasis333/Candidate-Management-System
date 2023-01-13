@@ -49,18 +49,6 @@ namespace EFDataAccess.Data.Repositories
                 LoadCandidateCertificates(_context, candidateCertificate);
             }
 
-            return candidateCertificates.ToList();
-        }
-
-        public async Task<IEnumerable<CandidateCertificates>> GetCertificatesByCandidateIdAsync(int candidateId)
-        {
-            var currentCandidate = _context.Candidates.Include("CandidateCertificates").Where(p => p.CandidateId == candidateId).SingleOrDefault();
-            var candidateCertificates = currentCandidate.CandidateCertificates;
-
-            foreach (CandidateCertificates candidateCertificate in candidateCertificates)
-            {
-                LoadCandidateCertificates(_context, candidateCertificate);
-            }
             return await Task.Run(() => candidateCertificates.ToList());
         }
 

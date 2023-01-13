@@ -71,14 +71,6 @@ namespace EFDataAccess.Data.Repositories
         /// </summary>
         public IEnumerable<Candidate> GetAllCandidates()
         {
-            return _context.Candidates.ToList();
-        }
-
-        /// <summary>
-        /// Returns all the candidates with thier information async
-        /// </summary>
-        public async Task<IEnumerable<Candidate>> GetAllCandidatesAsync()
-        {
             return await Task.Run(() => _context.Candidates.ToList());
         }
 
