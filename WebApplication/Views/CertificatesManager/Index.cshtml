@@ -2,10 +2,6 @@
 
 <h2>@ViewBag.Title</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-
 <table class="table">
     <thead>
         <tr>
@@ -24,9 +20,7 @@
             <td>@Html.DisplayFor(modelItem => item.AssessmentTestCode)</td>
             <td>@(item.Active ? "Active" : "Inactive")</td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.CertificateId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.CertificateId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.CertificateId })
+                @Html.ActionLink("Details", "Details", new { id = item.CertificateId })
             </td>
         </tr>
     }
