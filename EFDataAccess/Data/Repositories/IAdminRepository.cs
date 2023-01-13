@@ -9,16 +9,14 @@ namespace EFDataAccess.Data.Repositories
 {
     public interface IAdminRepository
     {
-        IEnumerable<Candidate> GetAllCandidates();
-        Task<IEnumerable<Candidate>> GetAllCandidatesAsync();
-        Candidate GetCandidate(int id);
-        void AddCandidate(Candidate candidate);
-        void UpdateCandidate(Candidate candidate);
-        void DeleteCandidate(int id);
-        void Save();
-        PhotoIdentificationType GetPhotoIdentificationType(int id);
-        IEnumerable<Candidate> GetAllCandidatesWithCertificates();
-        Task<IEnumerable<Candidate>> GetAllCandidatesWithCertificatesAsync();
-        IEnumerable<PhotoIdentificationType> GetAllPhotoIdentifications();
+        Task<IEnumerable<Candidate>> GetAllCandidates();
+        Task<Candidate> GetCandidate(int id);
+        Task AddCandidate(Candidate candidate);
+        Task UpdateCandidate(Candidate candidate);
+        Task DeleteCandidate(int id);
+        Task Save();
+        Task<PhotoIdentificationType> GetPhotoIdentificationType(int id);
+        Task<IEnumerable<Candidate>> GetAllCandidatesWithCertificates();
+        Task<IEnumerable<PhotoIdentificationType>> GetAllPhotoIdentifications();
     }
 }

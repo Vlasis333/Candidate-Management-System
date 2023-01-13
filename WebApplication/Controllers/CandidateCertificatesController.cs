@@ -35,7 +35,7 @@ namespace WebApplication.Controllers
         [HttpPost]
         public async Task<ActionResult> Index(int candidateId)
         {
-            var currentCandidate = _candidateRepository.GetCandidate(candidateId);
+            var currentCandidate = await _candidateRepository.GetCandidate(candidateId);
 
             if (currentCandidate != null)
             {
@@ -44,12 +44,12 @@ namespace WebApplication.Controllers
 
                 _candidateId = candidateId;
 
-                return View(await _candidateRepository.GetCertificatesByCandidateIdAsync(candidateId));
+                return View(await _candidateRepository.GetCertificatesByCandidateId(candidateId));
             }
             else
             {
                 ViewBag.Message = "This Id does not exist, please provide us with the correct Candidate Number (Id):";
-                return View("~/Views/Home/CandidateUI.cshtml");
+                return await Task.Run(() => View("~/Views/Home/CandidateUI.cshtml"));
             }
         }
 
@@ -58,18 +58,18 @@ namespace WebApplication.Controllers
         // </summary>            
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult DownloadAllCertificates()
+        public async Task<ActionResult> DownloadAllCertificates()
         {
-            string pdfPath = _candidateRepository.DownloadAllCertificatesOfCandidate(_candidateId);
+            string pdfPath = await _candidateRepository.DownloadAllCertificatesOfCandidate(_candidateId);
 
             if (!pdfPath.StartsWith("Error"))
             {
                 byte[] FileBytes = System.IO.File.ReadAllBytes(pdfPath);
-                return File(FileBytes, "application/pdf");
+                return await Task.Run(() => File(FileBytes, "application/pdf"));
             }
             else
             {
-                return Content($"<script language='javascript' type='text/javascript'>alert('{pdfPath}');</script>");
+                return await Task.Run(() => Content($"<script language='javascript' type='text/javascript'>alert('{pdfPath}');</script>"));
             }
         }
 

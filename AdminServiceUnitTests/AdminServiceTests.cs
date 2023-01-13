@@ -5,6 +5,7 @@ using EFDataAccess.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Runtime.Remoting.Contexts;
+using System.Threading.Tasks;
 
 namespace AdminServiceUnitTests
 {
@@ -17,7 +18,7 @@ namespace AdminServiceUnitTests
         /// Verifies that a new candidate can be added to the database
         /// </summary>
         [TestMethod]
-        public void TestAddCandidate()
+        public async Task TestAddCandidate()
         {
             // Arrange
             var candidate = new Candidate
@@ -52,10 +53,10 @@ namespace AdminServiceUnitTests
             };
 
             // Act
-            _adminrepository.AddCandidate(candidate);
+            await _adminrepository.AddCandidate(candidate);
 
             // Assert
-            var savedCandidate = _adminrepository.GetCandidate(candidate.CandidateId);
+            var savedCandidate = await _adminrepository.GetCandidate(candidate.CandidateId);
             Assert.AreEqual(candidate.FirstName, savedCandidate.FirstName);
             Assert.AreEqual(candidate.MiddleName, savedCandidate.MiddleName);
             Assert.AreEqual(candidate.LastName, savedCandidate.LastName);
@@ -79,13 +80,13 @@ namespace AdminServiceUnitTests
         /// Verifies that a candidate can be retrieved from the database
         /// </summary>
         [TestMethod]
-        public void TestGetCandidate()
+        public async Task TestGetCandidate()
         {
             // Arrange
             var candidateId = 2;
 
             // Act
-            var candidate = _adminrepository.GetCandidate(candidateId);
+            var candidate = await _adminrepository.GetCandidate(candidateId);
 
             // Assert
             Assert.IsNotNull(candidate);
@@ -113,7 +114,7 @@ namespace AdminServiceUnitTests
         /// Verifies that a candidate can be updated in the database
         /// </summary>
         [TestMethod]
-        public void TestUpdateCandidate()
+        public async Task TestUpdateCandidate()
         {
             // Arrange
             var candidateId = 1;
@@ -150,7 +151,7 @@ namespace AdminServiceUnitTests
             };
 
             // Act
-            var candidateToUpdate = _adminrepository.GetCandidate(candidateId);
+            var candidateToUpdate = await _adminrepository.GetCandidate(candidateId);
             candidateToUpdate.FirstName = updatedCandidate.FirstName;
             candidateToUpdate.MiddleName = updatedCandidate.MiddleName;
             candidateToUpdate.LastName = updatedCandidate.LastName;
@@ -170,10 +171,10 @@ namespace AdminServiceUnitTests
             candidateToUpdate.CandidatePhotoIdentification.IssueDate = updatedCandidate.CandidatePhotoIdentification.IssueDate;
             candidateToUpdate.CandidatePhotoIdentification.PhotoIdentificationId = updatedCandidate.CandidatePhotoIdentification.PhotoIdentificationId;
 
-            _adminrepository.UpdateCandidate(candidateToUpdate);
+            await _adminrepository.UpdateCandidate(candidateToUpdate);
 
             // Assert
-            var updatedCandidateOnDB = _adminrepository.GetCandidate(candidateId);
+            var updatedCandidateOnDB = await _adminrepository.GetCandidate(candidateId);
             Assert.AreEqual(updatedCandidate.FirstName, updatedCandidateOnDB.FirstName);
             Assert.AreEqual(updatedCandidate.MiddleName, updatedCandidateOnDB.MiddleName);
             Assert.AreEqual(updatedCandidate.LastName, updatedCandidateOnDB.LastName);
@@ -197,16 +198,16 @@ namespace AdminServiceUnitTests
         /// Verifies that a candidate can be deleted from the database
         /// </summary>
         [TestMethod]
-        public void TestDeleteCandidate()
+        public async Task TestDeleteCandidate()
         {
             // Arrange
             var candidateId = 3;
 
             // Act
-            _adminrepository.DeleteCandidate(candidateId);
+            await _adminrepository.DeleteCandidate(candidateId);
 
             // Assert
-            var deletedCandidate = _adminrepository.GetCandidate(candidateId);
+            var deletedCandidate = await _adminrepository.GetCandidate(candidateId);
             Assert.IsNull(deletedCandidate);
         }
     }

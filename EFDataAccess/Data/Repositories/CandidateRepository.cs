@@ -31,15 +31,15 @@ namespace EFDataAccess.Data.Repositories
         /// <summary>
         /// Return information for the current candidate
         /// </summary>
-        public Candidate GetCandidate(int candidateId)
+        public async Task<Candidate> GetCandidate(int candidateId)
         {
-            return _context.Candidates.Find(candidateId);
+            return await Task.Run(() => _context.Candidates.Find(candidateId));
         }
 
         /// <summary>
         /// Return the certificates of a certain candidate
         /// </summary>
-        public IEnumerable<CandidateCertificates> GetCertificatesByCandidateId(int candidateId)
+        public async Task<IEnumerable<CandidateCertificates>> GetCertificatesByCandidateId(int candidateId)
         {
             var currentCandidate = _context.Candidates.Include("CandidateCertificates").Where(p => p.CandidateId == candidateId).SingleOrDefault();
             var candidateCertificates = currentCandidate.CandidateCertificates;
@@ -55,7 +55,7 @@ namespace EFDataAccess.Data.Repositories
         /// <summary>
         /// Download a pdf file with all the certificates of a candidate and returns a string with the info needed of the method (save or no save)
         /// </summary>
-        public string DownloadAllCertificatesOfCandidate(int candidateId)
+        public async Task<string> DownloadAllCertificatesOfCandidate(int candidateId)
         {
             // Export of Candidate’s Certificates in a .pdf format
             var currentCandidate = _context.Candidates.Include("CandidateCertificates").Where(p => p.CandidateId == candidateId).SingleOrDefault();
@@ -131,10 +131,10 @@ namespace EFDataAccess.Data.Repositories
             }
             catch (Exception ex)
             {
-                return $"Error: {ex.Message}";
+                return await Task.Run(() => $"Error: {ex.Message}");
             }
 
-            return returnString;
+            return await Task.Run(() => returnString);
         }
 
         /// <summary>

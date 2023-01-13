@@ -28,25 +28,25 @@ namespace EFDataAccess.Data.Repositories
         /// <summary>
         /// Method used to add new candidate to our DB
         /// </summary>
-        public void AddCandidate(Candidate candidate)
+        public async Task AddCandidate(Candidate candidate)
         {
             _context.Candidates.Add(candidate);
             _context.CandidateLocations.Add(candidate.CandidateLocation);
             _context.CandidateContacts.Add(candidate.CandidateContact);
             _context.CandidatePhotoIdentifications.Add(candidate.CandidatePhotoIdentification);
-            Save();
+            await Task.Run(() =>Save());
         }
 
         /// <summary>
         /// Method used to delete a candidate from the DB
         /// </summary>
-        public void DeleteCandidate(int id)
+        public async Task DeleteCandidate(int id)
         {
             var candidate = _context.Candidates.Include(c => c.CandidateCertificates).Where(p => p.CandidateId == id).SingleOrDefault();
             if (candidate != null)
             {
 
-                DeleteCandidateCertificateEntites(candidate);
+                await DeleteCandidateCertificateEntites(candidate);
 
                 try
                 {
@@ -55,7 +55,7 @@ namespace EFDataAccess.Data.Repositories
                     _context.CandidatePhotoIdentifications.Remove(candidate.CandidatePhotoIdentification);
                     _context.Candidates.Remove(candidate);
 
-                    Save();
+                    await Task.Run(() => Save());
                 }
                 catch (Exception ex)
                 {
@@ -69,7 +69,7 @@ namespace EFDataAccess.Data.Repositories
         /// <summary>
         /// Returns all the candidates with thier information
         /// </summary>
-        public IEnumerable<Candidate> GetAllCandidates()
+        public async Task<IEnumerable<Candidate>> GetAllCandidates()
         {
             return await Task.Run(() => _context.Candidates.ToList());
         }
@@ -77,46 +77,46 @@ namespace EFDataAccess.Data.Repositories
         /// <summary>
         /// Returns a single candidate by given Id
         /// </summary>
-        public Candidate GetCandidate(int id)
+        public async Task<Candidate> GetCandidate(int id)
         {
             Candidate candidate = _context.Candidates
             .Include(c => c.CandidateLocation)
             .Include(c => c.CandidateContact)
             .Include(c => c.CandidatePhotoIdentification)
             .SingleOrDefault(c => c.CandidateId == id);
-            return candidate;
+            return await Task.Run(() => candidate);
         }
 
         /// <summary>
         /// Save changes from entity to the DB
         /// </summary>
-        public void Save()
+        public async Task Save()
         {
-            _context.SaveChanges();
+            await Task.Run(() => _context.SaveChanges());
         }
 
         /// <summary>
         /// Update the selected candidate
         /// </summary>
-        public void UpdateCandidate(Candidate candidate)
+        public async Task UpdateCandidate(Candidate candidate)
         {
             _context.Entry(candidate).State = EntityState.Modified;
             _context.Entry(candidate.CandidateContact).State = EntityState.Modified;
             _context.Entry(candidate.CandidateLocation).State = EntityState.Modified;
             _context.Entry(candidate.CandidatePhotoIdentification).State = EntityState.Modified;
-            Save();
+            await Task.Run(() => Save());
         }
 
         /// <summary>
         /// Returns a list with all the certificates for every candidate
         /// </summary>
-        public IEnumerable<Candidate> GetAllCandidatesWithCertificates()
+        public async Task<IEnumerable<Candidate>> GetAllCandidatesWithCertificates()
         {
-            return _context.Candidates.Include(c => c.CandidateCertificates).ToList();
+            return await Task.Run(() => _context.Candidates.Include(c => c.CandidateCertificates).ToList());
         }
 
         /// <summary>
-        /// Returns a list with all the certificates for every candidate async
+        /// Returns a list with all the certificates for every candidate
         /// </summary>
         public async Task<IEnumerable<Candidate>> GetAllCandidatesWithCertificatesAsync()
         {
@@ -126,15 +126,15 @@ namespace EFDataAccess.Data.Repositories
         /// <summary>
         /// Returns a list with every photo id type
         /// </summary>
-        public IEnumerable<PhotoIdentificationType> GetAllPhotoIdentifications()
+        public async Task<IEnumerable<PhotoIdentificationType>> GetAllPhotoIdentifications()
         {
-            return _context.PhotoIdentificationTypes.ToList();
+            return await Task.Run(() => _context.PhotoIdentificationTypes.ToList());
         }
 
         /// <summary>
         /// Deletes all the entites of the certificates for the current candidate (relationship entities)
         /// </summary>
-        private void DeleteCandidateCertificateEntites(Candidate candidate)
+        private async Task DeleteCandidateCertificateEntites(Candidate candidate)
         {
             try
             {
@@ -155,7 +155,7 @@ namespace EFDataAccess.Data.Repositories
                 }
 
                 // removes certificates obtained by candidate - relationship tables
-                _context.CandidateCertificates.RemoveRange(candidateCertificates);
+                await Task.Run(() => _context.CandidateCertificates.RemoveRange(candidateCertificates));
             }
             catch (Exception ex)
             {
@@ -168,9 +168,9 @@ namespace EFDataAccess.Data.Repositories
         /// <summary>
         /// Method returns only a single photo identification type based on Id
         /// </summary>
-        public PhotoIdentificationType GetPhotoIdentificationType(int id)
+        public async Task<PhotoIdentificationType> GetPhotoIdentificationType(int id)
         {
-            return _context.PhotoIdentificationTypes.SingleOrDefault(c => c.PhotoIdentificationTypeId == id); ;
+            return await Task.Run(() => _context.PhotoIdentificationTypes.SingleOrDefault(c => c.PhotoIdentificationTypeId == id));
         }
 
         /// <summary>

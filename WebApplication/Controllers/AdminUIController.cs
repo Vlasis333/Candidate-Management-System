@@ -31,32 +31,32 @@ namespace WebApplication.Controllers
         {
             ViewBag.Title = "Logged in as Administrator";
 
-            return View(await _adminrepository.GetAllCandidatesAsync());
+            return View(await _adminrepository.GetAllCandidates());
         }
 
         /// <summary>
         /// Details of the selected candidate
         /// </summary>
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(int id)
         {
             ViewBag.Title = "Logged in as Administrator";
 
-            var currentCandidate = _adminrepository.GetCandidate(id);
+            var currentCandidate = await _adminrepository.GetCandidate(id);
 
             ViewBag.Message = $"Details of {currentCandidate.FirstName} {currentCandidate.LastName}";
 
-            return View(currentCandidate);
+            return await Task.Run(() => View(currentCandidate));
         }
 
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
             //default create
             ViewBag.Title = "Logged in as Administrator";
             ViewBag.Message = "Create New Candidate";
 
-            PopulatedDropDownLists();
+            await PopulatedDropDownLists();
 
-            return View();
+            return await Task.Run(() => View());
         }
 
         /// <summary>
@@ -64,34 +64,34 @@ namespace WebApplication.Controllers
         /// </summary>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Candidate candidate)
+        public async Task<ActionResult> Create(Candidate candidate)
         {
             if (ModelState.IsValid)
             {
                 ViewBag.Title = "Logged in as Administrator";
                 ViewBag.Message = "Create New Candidate";
 
-                _adminrepository.AddCandidate(candidate);
-                return RedirectToAction("Index");
+                await _adminrepository.AddCandidate(candidate);
+                return await Task.Run(() => RedirectToAction("Index"));
             }
 
-            PopulatedDropDownLists();
+            await PopulatedDropDownLists();
 
-            return View(candidate);
+            return await Task.Run(() => View(candidate));
         }
 
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
             //default edit
             ViewBag.Title = "Logged in as Administrator";
 
-            var currentCandidate = _adminrepository.GetCandidate(id);
+            var currentCandidate = await _adminrepository.GetCandidate(id);
 
             ViewBag.Message = $"Edit candidate: {currentCandidate.FirstName} {currentCandidate.LastName}";
 
-            PopulatedDropDownLists(currentCandidate);
+            await PopulatedDropDownLists(currentCandidate);
 
-            return View(currentCandidate);
+            return await Task.Run(() => View(currentCandidate));
         }
 
         /// <summary>
@@ -99,35 +99,35 @@ namespace WebApplication.Controllers
         /// </summary>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Candidate candidate)
+        public async Task<ActionResult> Edit(Candidate candidate)
         {
             if (ModelState.IsValid)
             {
                 ViewBag.Title = "Logged in as Administrator";
                 ViewBag.Message = $"Edit candidate: {candidate.FirstName} {candidate.LastName}";
 
-                _adminrepository.UpdateCandidate(candidate);
+                await _adminrepository.UpdateCandidate(candidate);
 
-                return RedirectToAction("Index");
+                return await Task.Run(() => RedirectToAction("Index"));
             }
 
-            PopulatedDropDownLists(candidate);
+            await PopulatedDropDownLists(candidate);
 
-            return View(candidate);
+            return await Task.Run(() => View(candidate));
         }
 
         /// <summary>
         /// Form for the selected candidate to be deleted
         /// </summary>
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
             ViewBag.Title = "Logged in as Administrator";
 
-            var currentCandidate = _adminrepository.GetCandidate(id);
+            var currentCandidate = await _adminrepository.GetCandidate(id);
 
             ViewBag.Message = $"Are you sure you want to delete {currentCandidate.FirstName} {currentCandidate.LastName}?";
 
-            return View(currentCandidate);
+            return await Task.Run(() => View(currentCandidate));
         }
 
         /// <summary>
@@ -135,10 +135,10 @@ namespace WebApplication.Controllers
         /// </summary>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            _adminrepository.DeleteCandidate(id);
-            return RedirectToAction("Index");
+            await _adminrepository.DeleteCandidate(id);
+            return await Task.Run(() => RedirectToAction("Index"));
         }
 
         /// <summary>
@@ -149,16 +149,16 @@ namespace WebApplication.Controllers
             ViewBag.Title = "Logged in as Administrator";
             ViewBag.Message = "List of all certificates for each candidate";
 
-            return View(await _adminrepository.GetAllCandidatesWithCertificatesAsync());
+            return View(await _adminrepository.GetAllCandidatesWithCertificates());
         }
 
         /// <summary>
         /// Create a VewBag element to be used for the photo identification list
         /// </summary>
-        private void AddDropDownPhotoIdentifications(Candidate candidate = null)
+        private async Task AddDropDownPhotoIdentifications(Candidate candidate = null)
         {
             var listOfIdentifications = new List<SelectListItem>();
-            var identificationTypes = _adminrepository.GetAllPhotoIdentifications();
+            var identificationTypes = await _adminrepository.GetAllPhotoIdentifications();
 
             var group = new SelectListGroup();
 
@@ -242,9 +242,9 @@ namespace WebApplication.Controllers
         /// <summary>
         /// Method Used to populate all the drop down editors on our views
         /// </summary>
-        private void PopulatedDropDownLists(Candidate candidate = null)
+        private async Task PopulatedDropDownLists(Candidate candidate = null)
         {
-            AddDropDownPhotoIdentifications(candidate);
+            await AddDropDownPhotoIdentifications(candidate);
             AddDropDown(typeof(LanguagesEnum), candidate);
             AddDropDown(typeof(GendersEnum), candidate);
         }
