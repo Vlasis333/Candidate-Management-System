@@ -7,3 +7,12 @@ The application is composed of three projects:
   - EFDataAccess: a class library containing the models, entities, and AppContext for the application, 
   - WebApplication: which houses the main application
   - UnitTests: which are used to perform CRUD operations on the admin service and verify data integrity
+
+## Instructions
+1. Clone repository
+2. Right click on solution and select 'Restore NuGet Packages'
+3. On EFDataAccess project run this command at Package Manager Console
+    - 'Update-Database'
+    - You can change the location of the database from the Web.config file and App.config.
+    - Default: localdb
+4. Run MVC application
